@@ -1,0 +1,68 @@
+import discord
+import datetime
+import sys
+
+print("Server Runing....")
+
+def read_token():
+    with open("token.txt", "r") as f:
+        lines = f.readlines()
+        return lines[0].strip()
+
+token = read_token()
+
+client = discord.Client()
+
+@client.event
+async def on_member_join(member):
+    global mem
+    mem = member
+#     for channel in member.server.channels:
+#         if str(channel) == "general":
+#             await client.send_message(f"Welcome to the server {member.mention}")
+    return member
+
+
+
+@client.event
+async def on_message(message):
+    id = client.get_guild(692093634333507736)
+    channels = ["test-channel", "general"]
+    # valid_users = ['ebulo']
+    hour = datetime.datetime.now().time().hour
+
+    if str(message.channel) in channels:
+        # print(message)
+        msg = message.content
+        if message.content.find("_hello") != -1:
+            await message.channel.send(f"Hi {str(message.author)[0:-5]}")
+            if hour > 18 and hour <= 23:
+                await message.channel.send("Good Evening..😯")
+            elif hour > 00 and hour < 4:
+                await message.channel.send("""Should I say Good Morning..Go to sleep bro....😏And wake Up early""")
+            elif hour > 4 and hour < 12:
+                await message.channel.send("Good Morning.. Have Nice day😃")
+            elif hour > 12 and hour < 18:
+                await message.channel.send("Good Evening..😉")
+            else:
+                await message.channel.send("Love You I am dead..😴")
+
+
+        elif message.content == "_users":
+            await message.channel.send(f""" # No.of Users: {id.member_count}😮""")
+        elif "_say:" in msg:
+            await message.channel.send(f"{msg[5:-1]}")
+        elif "thanks" in str(msg).lower():
+            await message.channel.send(f"You Are Most Welcome {str(message.author)[0:-5]}🙂")
+        elif "i-love-you" in str(msg).lower():
+            await message.channel.send(f"I Love You too {str(message.author)[0:-5]}🥰")
+        elif "-finally" in str(msg).lower():
+            await message.channel.send(f"No worries {str(message.author)[0:-5]} you are finally Done, you can go to sleep now..")
+        elif "goodnight" in str(msg).lower():
+            await message.channel.send(f"Bye Good night, sleep tight😴😴")
+            sys.exit()
+        elif "go-offline" in str(msg).lower():
+            sys.exit()
+
+
+client.run(token)
