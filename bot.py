@@ -1,5 +1,6 @@
 import discord
 import datetime
+import wikipedia
 import sys
 
 print("Server Runing....")
@@ -13,14 +14,14 @@ token = read_token()
 
 client = discord.Client()
 
-@client.event
-async def on_member_join(member):
-    global mem
-    mem = member
-#     for channel in member.server.channels:
-#         if str(channel) == "general":
-#             await client.send_message(f"Welcome to the server {member.mention}")
-    return member
+# @client.event
+# async def on_member_join(member):
+#     global mem
+#     mem = member
+# #     for channel in member.server.channels:
+# #         if str(channel) == "general":
+# #             await client.send_message(f"Welcome to the server {member.mention}")
+#     return member
 
 
 
@@ -38,11 +39,11 @@ async def on_message(message):
             await message.channel.send(f"Hi {str(message.author)[0:-5]}")
             if hour > 18 and hour <= 23:
                 await message.channel.send("Good Evening..😯")
-            elif hour > 00 and hour < 4:
+            elif hour >= 00 and hour < 4:
                 await message.channel.send("""Should I say Good Morning..Go to sleep bro....😏And wake Up early""")
-            elif hour > 4 and hour < 12:
+            elif hour >= 4 and hour < 12:
                 await message.channel.send("Good Morning.. Have Nice day😃")
-            elif hour > 12 and hour < 18:
+            elif hour >= 12 and hour < 18:
                 await message.channel.send("Good Evening..😉")
             else:
                 await message.channel.send("Love You I am dead..😴")
@@ -58,11 +59,31 @@ async def on_message(message):
             await message.channel.send(f"I Love You too {str(message.author)[0:-5]}🥰")
         elif "-finally" in str(msg).lower():
             await message.channel.send(f"No worries {str(message.author)[0:-5]} you are finally Done, you can go to sleep now..")
+        elif "_good" in str(msg[0:6]):
+            await message.channel.send("Thank You..")
+        elif "_bye" in str(msg):
+            await message.channel.send("Byee..")
+        # elif "how" or "when" or "where" or "why"  in str(msg).lower():
+        #     try:
+        #         search_result = wikipedia.summary(msg, sentences=4)
+        #         await message.channel.send(search_result)
+        #     except Exception:
+        #         await message.channel.send("Didn't Find any relevant wiki page..")
+
+        elif "_wiki" in str(msg).lower():
+            try:
+                search_result = wikipedia.summary(str(msg).replace("_wiki", ""), sentences=4)
+                await message.channel.send(search_result)
+            except Exception:
+                await message.channel.send("Didn't Find any relevant wiki pages..")
+        
         elif "goodnight" in str(msg).lower():
             await message.channel.send(f"Bye Good night, sleep tight😴😴")
             sys.exit()
         elif "go-offline" in str(msg).lower():
             sys.exit()
 
-
 client.run(token)
+
+# or "when" or "where" or "why" 
+#  or "when" in str(msg).lower() or "where" in str(msg).lower()
