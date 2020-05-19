@@ -2,15 +2,18 @@ import discord
 import datetime
 import wikipedia
 import sys
+import requests
+from time import sleep
+import tok
 
 print("Server Runing....")
 
-def read_token():
-    with open("token.txt", "r") as f:
-        lines = f.readlines()
-        return lines[0].strip()
+# def read_token():
+#     with open("token.txt", "r") as f:
+#         lines = f.readlines()
+#         return lines[0].strip()
 
-token = read_token()
+token = tok.pas
 
 client = discord.Client()
 
@@ -76,7 +79,38 @@ async def on_message(message):
                 await message.channel.send(search_result)
             except Exception:
                 await message.channel.send("Didn't Find any relevant wiki pages..")
+
         
+
+        elif "news" in str(msg).lower():
+            api_key = "96a24fcb4d304307938060377016e9fc"
+
+            url = f"http://newsapi.org/v2/top-headlines?sources=google-news-in&apiKey={api_key}"
+
+            req = requests.get(url)
+
+            json_format = req.json()['articles']
+            # print(json_format)
+            a = 0
+            for i in json_format:
+                await message.channel.send(f".... {i['title']}")
+                await message.channel.send(f"_img_at_..{i['urlToImage']}")
+                await message.channel.send("....")
+                sleep(2)
+                if a == 0:
+                    await message.channel.send("Those were trending 10 articles for today..")
+                    break
+                # a += 1
+
+
+
+        elif "_image-try" in str(msg).lower():
+            file = discord.File("india-view.png", filename="india-view.png")
+            await message.channel.send("india-view.png", file=file)
+
+        elif "woho" in str(msg).lower():
+            await message.channel.send("Yeahh..")
+
         elif "goodnight" in str(msg).lower():
             await message.channel.send(f"Bye Good night, sleep tight😴😴")
             sys.exit()
