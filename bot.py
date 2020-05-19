@@ -4,7 +4,7 @@ import wikipedia
 import sys
 import requests
 from time import sleep
-import toksecrect
+import tocsecret_p
 
 print("Server Runing....")
 
@@ -13,7 +13,7 @@ print("Server Runing....")
 #         lines = f.readlines()
 #         return lines[0].strip()
 
-token = toksecrect.pas
+token = tocsecret_p.d
 
 client = discord.Client()
 
