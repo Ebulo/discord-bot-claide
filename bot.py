@@ -5,13 +5,9 @@ import sys
 import requests
 from time import sleep
 import tocsecret
+import search_by_google as sg
 
 print("Server Runing....")
-
-# def read_token():
-#     with open("token.txt", "r") as f:
-#         lines = f.readlines()
-#         return lines[0].strip()
 
 token = tocsecret.d
 
@@ -35,8 +31,11 @@ async def on_message(message):
     # valid_users = ['ebulo']
     hour = datetime.datetime.now().time().hour
 
+    a = 0
+
     if str(message.channel) in channels:
         # print(message)
+        excite_list = ["Wohoo", "woho", "Awesome", "wow", "Yeah"]
         msg = message.content
         if message.content.find("_hello") != -1:
             await message.channel.send(f"Hi {str(message.author)[0:-5]}")
@@ -66,12 +65,7 @@ async def on_message(message):
             await message.channel.send("Thank You..")
         elif "_bye" in str(msg):
             await message.channel.send("Byee..")
-        # elif "how" or "when" or "where" or "why"  in str(msg).lower():
-        #     try:
-        #         search_result = wikipedia.summary(msg, sentences=4)
-        #         await message.channel.send(search_result)
-        #     except Exception:
-        #         await message.channel.send("Didn't Find any relevant wiki page..")
+
 
         elif "_wiki" in str(msg).lower():
             try:
@@ -80,7 +74,10 @@ async def on_message(message):
             except Exception:
                 await message.channel.send("Didn't Find any relevant wiki pages..")
 
-        
+        elif "claide" in str(msg).lower():
+            query = str(msg).replace("claide", "")
+            result_list = sg.search_data(query)
+            await message.channel.send(result_list)
 
         elif "news" in str(msg).lower():
             api_key = "96a24fcb4d304307938060377016e9fc"
@@ -93,15 +90,14 @@ async def on_message(message):
             # print(json_format)
             a = 0
             for i in json_format:
-                await message.channel.send(f".... {i['title']}")
-                await message.channel.send(f"_img_at_..{i['urlToImage']}")
                 await message.channel.send("....")
-                sleep(2)
-                if a == 0:
-                    await message.channel.send("Those were trending 10 articles for today..")
+                await message.channel.send(f"{i['title']}..{i['url']}")
+                await message.channel.send(f"{i['urlToImage']}")
+                sleep(4)
+                if a == 4:
+                    await message.channel.send("That was some trending articles for today..")
                     break
-                # a += 1
-
+                a += 1
 
 
         elif "_image-try" in str(msg).lower():
