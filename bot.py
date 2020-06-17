@@ -3,6 +3,7 @@ import datetime
 import wikipedia
 import sys
 import requests
+import random
 from time import sleep
 import tocsecret
 import search_by_google as sg
@@ -31,24 +32,34 @@ async def on_message(message):
     # valid_users = ['ebulo']
     hour = datetime.datetime.now().time().hour
 
-    a = 0
 
     if str(message.channel) in channels:
-        # print(message)
-        excite_list = ["Wohoo", "woho", "Awesome", "wow", "Yeah"]
+        
+        excite_list = ["Wohoo", "woho", "awesome", "wow", "Yeah"]
+        excite_reply = ["yeahh", "Really awesome", "great", "yiepiee", "wohooooo..", "me excited", "GOOD, I like it"]
+        goodnight = ["Gn", "gud98", "gudn8", "gdn8", "goodnight"]
+
         msg = message.content
         if message.content.find("_hello") != -1:
             await message.channel.send(f"Hi {str(message.author)[0:-5]}")
-            if hour > 18 and hour <= 23:
-                await message.channel.send("Good Evening..😯")
-            elif hour >= 00 and hour < 4:
-                await message.channel.send("""Should I say Good Morning..Go to sleep bro....😏And wake Up early""")
-            elif hour >= 4 and hour < 12:
-                await message.channel.send("Good Morning.. Have Nice day😃")
-            elif hour >= 12 and hour < 18:
-                await message.channel.send("Good Evening..😉")
+            if hour >= 4 and hour <=11:
+                await message.channel.send("Good Morning! Have Nice day 😃")
+            if hour >= 12 and hour <= 16:
+                await message.channel.send("Good Afetrnoon! 😉") 
+            if hour >=17 and hour <= 23:
+                await message.channel.send("Good Evening! 😎")
+            if hour >= 0 and hour <= 3:
+                await message.channel.send("It's Time To Sleep 😴")
             else:
-                await message.channel.send("Love You I am dead..😴")
+                await message.channel.send("Something Went Wrong 🛸")
+            # if hour > 18 and hour <= 23:
+            #     await message.channel.send("Good Evening..😯")
+            # elif hour >= 00 and hour < 4:
+            #     await message.channel.send("""Should I say Good Morning..Go to sleep bro....😏And wake Up early""")
+            # elif hour >= 4 and hour < 12:
+            #     await message.channel.send("Good Morning.. Have Nice day😃")
+            # elif hour >= 12 and hour < 18:
+            #     await message.channel.send("Good Evening..")
 
 
         elif message.content == "_users":
@@ -63,6 +74,8 @@ async def on_message(message):
             await message.channel.send(f"No worries {str(message.author)[0:-5]} you are finally Done, you can go to sleep now..")
         elif "_good" in str(msg[0:6]):
             await message.channel.send("Thank You..")
+        elif "_welcome" in str(msg[0:10]):
+            await message.channel.send("It's my Pleasure..")
         elif "_bye" in str(msg):
             await message.channel.send("Byee..")
 
@@ -80,40 +93,45 @@ async def on_message(message):
             await message.channel.send(result_list)
 
         elif "news" in str(msg).lower():
-            api_key = "96a24fcb4d304307938060377016e9fc"
+            news_list = sg.getNews("Topic")
+            await message.channel.send(news_list)
+            # api_key = "96a24fcb4d304307938060377016e9fc"
 
-            url = f"http://newsapi.org/v2/top-headlines?sources=google-news-in&apiKey={api_key}"
+            # url = f"http://newsapi.org/v2/top-headlines?sources=google-news-in&apiKey={api_key}"
 
-            req = requests.get(url)
+            # req = requests.get(url)
 
-            json_format = req.json()['articles']
-            # print(json_format)
-            a = 0
-            for i in json_format:
-                await message.channel.send("....")
-                await message.channel.send(f"{i['title']}..{i['url']}")
-                await message.channel.send(f"{i['urlToImage']}")
-                sleep(4)
-                if a == 4:
-                    await message.channel.send("That was some trending articles for today..")
-                    break
-                a += 1
+            # json_format = req.json()['articles']
+            # # print(json_format)
+            # a = 0
+            # for i in json_format:
+            #     await message.channel.send("....")
+            #     await message.channel.send(f"{i['title']}..{i['url']}")
+            #     await message.channel.send(f"{i['urlToImage']}")
+            #     sleep(4)
+            #     if a == 0:
+            #         await message.channel.send("That was some trending articles for today..")
+            #         break
+            #     a += 1
 
 
         elif "_image-try" in str(msg).lower():
             file = discord.File("india-view.png", filename="india-view.png")
             await message.channel.send("india-view.png", file=file)
 
-        elif "woho" in str(msg).lower():
-            await message.channel.send("Yeahh..")
+        # elif "woho" in str(msg).lower():
+        #     await message.channel.send("Yeahh..")
 
-        elif "goodnight" in str(msg).lower():
-            await message.channel.send(f"Bye Good night, sleep tight😴😴")
+        elif str(msg).lower() in excite_list:
+            r_num = random.randint(0, len(excite_reply-1))
+            await message.channel.send(excite_reply[r_num])
+
+        elif str(msg).lower() in goodnight:
+            r_num1 = random.randint(0, len(goodnight-1))
+            await message.channel.send(f"{goodnight[r_num1]} + {str(message.author)[0:-5]}")
             sys.exit()
+
         elif "go-offline" in str(msg).lower():
             sys.exit()
 
 client.run(token)
-
-# or "when" or "where" or "why" 
-#  or "when" in str(msg).lower() or "where" in str(msg).lower()
