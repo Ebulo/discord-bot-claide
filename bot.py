@@ -42,13 +42,14 @@ async def on_message(message):
         msg = message.content
         if message.content.find("_hello") != -1:
             await message.channel.send(f"Hi {str(message.author)[0:-5]}")
+            await message.channel.send(hour)
             if hour >= 4 and hour <=11:
                 await message.channel.send("Good Morning! Have Nice day 😃")
-            if hour >= 12 and hour <= 16:
-                await message.channel.send("Good Afetrnoon! 😉") 
-            if hour >=17 and hour <= 23:
+            elif hour >= 12 and hour <= 16:
+                await message.channel.send("Good Afetrnoon! 😉")
+            elif hour >=17 and hour <= 23:
                 await message.channel.send("Good Evening! 😎")
-            if hour >= 0 and hour <= 3:
+            elif hour >= 0 and hour <= 3:
                 await message.channel.send("It's Time To Sleep 😴")
             else:
                 await message.channel.send("Something Went Wrong 🛸")
@@ -93,8 +94,8 @@ async def on_message(message):
             await message.channel.send(result_list)
 
         elif "news" in str(msg).lower():
-            news_list = sg.getNews("Topic")
-            await message.channel.send(news_list)
+            news_list1 = sg.getNews("Topic")
+            await message.channel.send(news_list1)
             # api_key = "96a24fcb4d304307938060377016e9fc"
 
             # url = f"http://newsapi.org/v2/top-headlines?sources=google-news-in&apiKey={api_key}"
@@ -119,15 +120,15 @@ async def on_message(message):
             file = discord.File("india-view.png", filename="india-view.png")
             await message.channel.send("india-view.png", file=file)
 
-        # elif "woho" in str(msg).lower():
-        #     await message.channel.send("Yeahh..")
+        elif "woho" in str(msg).lower():
+            await message.channel.send("Yeahh..")
 
         elif str(msg).lower() in excite_list:
-            r_num = random.randint(0, len(excite_reply-1))
+            r_num = random.randint(0, len(excite_reply)-1)
             await message.channel.send(excite_reply[r_num])
 
         elif str(msg).lower() in goodnight:
-            r_num1 = random.randint(0, len(goodnight-1))
+            r_num1 = random.randint(0, len(goodnight)-1)
             await message.channel.send(f"{goodnight[r_num1]} + {str(message.author)[0:-5]}")
             sys.exit()
 
