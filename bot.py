@@ -97,7 +97,7 @@ async def on_message(message):
             await message.channel.send(result_list)
 
         elif "news" in str(msg).lower():
-            news_list1 = sg.getNews("Topic")
+            news_list1 = sg.getNews("TechTopic")
             await message.channel.send(news_list1)
             # api_key = "96a24fcb4d304307938060377016e9fc"
 

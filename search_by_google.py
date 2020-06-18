@@ -30,5 +30,3 @@ def getNews(topic):
         if c == 8:
             break
     return news_list
-
-print(getNews("topic"))
