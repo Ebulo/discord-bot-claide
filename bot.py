@@ -1,5 +1,6 @@
 import discord
-import datetime
+from datetime import datetime
+import pytz
 import wikipedia
 import sys
 import requests
@@ -30,26 +31,28 @@ async def on_message(message):
     id = client.get_guild(692093634333507736)
     channels = ["test-channel", "general"]
     # valid_users = ['ebulo']
-    hour = datetime.datetime.now().time().hour
+    IST = pytz.timezone('Asia/Kolkata')
+    hr = datetime.now(IST).hour
 
 
     if str(message.channel) in channels:
         
-        excite_list = ["Wohoo", "woho", "awesome", "wow", "Yeah"]
-        excite_reply = ["yeahh", "Really awesome", "great", "yiepiee", "wohooooo..", "me excited", "GOOD, I like it"]
+        excite_list = ["Wohoo", "woho", "awesome", "wow", "Yeah", "wonderfull", "insane"]
+        excite_reply = ["yeahh", "Really awesome", "great", "yiepiee", "wohooooo..", "me excited", "GOOD, I like it", "glad you like it"]
         goodnight = ["Gn", "gud98", "gudn8", "gdn8", "goodnight"]
 
         msg = message.content
         if message.content.find("_hello") != -1:
             await message.channel.send(f"Hi {str(message.author)[0:-5]}")
-            await message.channel.send(hour)
-            if hour >= 4 and hour <=11:
+            # This app is actually running on US servers.
+            await message.channel.send(hr)
+            if hr >= 4 and hr <=11:
                 await message.channel.send("Good Morning! Have Nice day 😃")
-            elif hour >= 12 and hour <= 16:
+            elif hr >= 12 and hr <= 16:
                 await message.channel.send("Good Afetrnoon! 😉")
-            elif hour >=17 and hour <= 23:
+            elif hr >=17 and hr <= 23:
                 await message.channel.send("Good Evening! 😎")
-            elif hour >= 0 and hour <= 3:
+            elif hr >= 0 and hr <= 3:
                 await message.channel.send("It's Time To Sleep 😴")
             else:
                 await message.channel.send("Something Went Wrong 🛸")
@@ -120,8 +123,8 @@ async def on_message(message):
             file = discord.File("india-view.png", filename="india-view.png")
             await message.channel.send("india-view.png", file=file)
 
-        elif "woho" in str(msg).lower():
-            await message.channel.send("Yeahh..")
+        # elif "woho" in str(msg).lower():
+        #     await message.channel.send("Yeahh..")
 
         elif str(msg).lower() in excite_list:
             r_num = random.randint(0, len(excite_reply)-1)

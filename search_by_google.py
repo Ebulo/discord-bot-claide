@@ -23,7 +23,7 @@ def getNews(topic):
     news_list = []
     c = 1
     for i in json_format:
-        article = f"{str(c)} + '. ', {i['title']}, {i['url']}, {i['urlToImage']}"
+        article = f"{str(c)}. {i['title']} {i['url']} | {i['urlToImage']}               "
         news_list.append(article)
         # news_list.append("\n")
         c += 1
