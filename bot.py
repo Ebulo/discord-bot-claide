@@ -24,6 +24,24 @@ client = discord.Client()
 # #             await client.send_message(f"Welcome to the server {member.mention}")
 #     return member
 
+@client.command()
+async def displayembed():
+    embed = discord.Embed(
+        title = "News,"
+        description = "Started the First News.",
+        colour = discord.Color.dark_green,
+    )
+
+    embed.set_footer(text='Footer')
+    embed.set_image(url='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQndekU9PEHyfx_h6KKye1O-92jvbr2qdrZbw&usqp=CAU')
+    embed.set_thumbnail(url='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQndekU9PEHyfx_h6KKye1O-92jvbr2qdrZbw&usqp=CAU')
+    embed.set_author(name='Author Name')
+    icon_url = 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Windows_Settings_app_icon.png'
+    embed.add_field(name='Field Name', value='Value', inline=False)
+    embed.add_field(name='Field Name', value='Value', inline=True)
+    embed.add_field(name='Field Name', value='Value', inline=True)
+
+    await client.say(embed=embed)
 
 
 @client.event
@@ -122,10 +140,6 @@ async def on_message(message):
 
         elif "_play" in str(msg).lower():
             await message.channel.send("Play is in a Beta Mode and still working on it.")
-
-        elif "_test" in str(msg).lower():
-            abc = sg.test()
-            await message.channel.send(abc)
 
         elif "_image-try" in str(msg).lower():
             file = discord.File("india-view.png", filename="india-view.png")
