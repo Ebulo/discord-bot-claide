@@ -91,14 +91,16 @@ async def on_message(message):
             except Exception:
                 await message.channel.send("Didn't Find any relevant wiki pages..")
 
-        elif "claide" in str(msg).lower():
-            query = str(msg).replace("claide", "")
-            result_list = sg.search_data(query)
-            await message.channel.send(result_list)
-
         elif "news" in str(msg).lower():
             news_list1 = sg.getNews("TechTopic")
             await message.channel.send(news_list1)
+
+        elif "claide" in str(msg).lower():
+            query = str(msg).replace("claide", "")
+            query = str(msg).replace("Claide", "")
+            result_list = sg.search_data(query)
+            await message.channel.send(result_list)
+
             # api_key = "96a24fcb4d304307938060377016e9fc"
 
             # url = f"http://newsapi.org/v2/top-headlines?sources=google-news-in&apiKey={api_key}"
@@ -117,6 +119,9 @@ async def on_message(message):
             #         await message.channel.send("That was some trending articles for today..")
             #         break
             #     a += 1
+
+        elif "_play" in str(msg).lower():
+            await message.channel.send("Play is in a Beta Mode and still working on it.")
 
 
         elif "_image-try" in str(msg).lower():
