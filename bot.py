@@ -24,25 +24,6 @@ client = discord.Client()
 # #             await client.send_message(f"Welcome to the server {member.mention}")
 #     return member
 
-# @client.command()
-# async def displayembed():
-#     embed = discord.Embed(
-#         title = "News,"
-#         # description = "Started the First News.",
-#         colour = discord.Color.dark_green,
-#     )
-
-#     embed.set_footer(text='Footer')
-#     embed.set_image(url='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQndekU9PEHyfx_h6KKye1O-92jvbr2qdrZbw&usqp=CAU')
-#     embed.set_thumbnail(url='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQndekU9PEHyfx_h6KKye1O-92jvbr2qdrZbw&usqp=CAU')
-#     embed.set_author(name='Author Name')
-#     icon_url = 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Windows_Settings_app_icon.png'
-#     embed.add_field(name='Field Name', value='Value', inline=False)
-#     embed.add_field(name='Field Name', value='Value', inline=True)
-#     embed.add_field(name='Field Name', value='Value', inline=True)
-
-#     await client.say(embed=embed)
-
 
 @client.event
 async def on_message(message):
@@ -62,7 +43,7 @@ async def on_message(message):
         msg = message.content
         if message.content.find("_hello") != -1:
             await message.channel.send(f"Hi {str(message.author)[0:-5]}")
-            # This app is actually running on US servers.
+            
             await message.channel.send(hr)
             if hr >= 4 and hr <=11:
                 await message.channel.send("Good Morning! Have Nice day 😃")
@@ -74,14 +55,6 @@ async def on_message(message):
                 await message.channel.send("It's Time To Sleep 😴")
             else:
                 await message.channel.send("Something Went Wrong 🛸")
-            # if hour > 18 and hour <= 23:
-            #     await message.channel.send("Good Evening..😯")
-            # elif hour >= 00 and hour < 4:
-            #     await message.channel.send("""Should I say Good Morning..Go to sleep bro....😏And wake Up early""")
-            # elif hour >= 4 and hour < 12:
-            #     await message.channel.send("Good Morning.. Have Nice day😃")
-            # elif hour >= 12 and hour < 18:
-            #     await message.channel.send("Good Evening..")
 
 
         elif message.content == "_users":
@@ -138,9 +111,10 @@ async def on_message(message):
             #         break
             #     a += 1
 
-        elif "send_embed" in str(msg).lower():
-            embed = discord.Embed(title="Hello", description='I am a game bot')
-            embed.add_field(name="I am Claide", value="Who are you")
+        elif "_sendtry" in str(msg).lower():
+            embed = discord.Embed(title="Hello", description='I am a game bot', color=0x00ff00)
+            embed.add_field(name="Claide", value="bot", inline=False)
+            embed.add_field(name="EbuloBot", value="PreviousBot", inline=False)
             await message.channel.send(embed=embed)
 
         elif "_play" in str(msg).lower():
