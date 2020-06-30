@@ -48,3 +48,8 @@ def getNews(topic):
             break
         news.append(i['title'])
         a = a + 1
+    return news
+
+
+def test():
+    return "Test is working, Function from different module is working fine."

@@ -91,7 +91,7 @@ async def on_message(message):
             except Exception:
                 await message.channel.send("Didn't Find any relevant wiki pages..")
 
-        elif "news" in str(msg).lower():
+        elif "_news" in str(msg).lower():
             news_list1 = sg.getNews("TechTopic")
             await message.channel.send(news_list1)
 
@@ -123,6 +123,9 @@ async def on_message(message):
         elif "_play" in str(msg).lower():
             await message.channel.send("Play is in a Beta Mode and still working on it.")
 
+        elif "_test" in str(msg).lower():
+            abc = sg.test()
+            await message.channel.send(abc)
 
         elif "_image-try" in str(msg).lower():
             file = discord.File("india-view.png", filename="india-view.png")
