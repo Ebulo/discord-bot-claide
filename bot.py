@@ -43,7 +43,7 @@ async def on_message(message):
         msg = message.content
         if message.content.find("_hello") != -1:
             await message.channel.send(f"Hi {str(message.author)[0:-5]}")
-            
+
             await message.channel.send(hr)
             if hr >= 4 and hr <=11:
                 await message.channel.send("Good Morning! Have Nice day 😃")
@@ -88,7 +88,6 @@ async def on_message(message):
 
         elif "claide" in str(msg).lower():
             query = str(msg).replace("claide", "")
-            query = str(msg).replace("Claide", "")
             result_list = sg.search_data(query)
             await message.channel.send(result_list)
 
@@ -111,7 +110,7 @@ async def on_message(message):
             #         break
             #     a += 1
 
-        elif "_sendtry" in str(msg).lower():
+        elif "_sendtry" in str(msg).lower():  #Error in sending the embed messages.
             embed = discord.Embed(title="Hello", description='I am a game bot', color=0x00ff00)
             embed.add_field(name="Claide", value="bot", inline=False)
             embed.add_field(name="EbuloBot", value="PreviousBot", inline=False)
