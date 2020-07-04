@@ -32,6 +32,7 @@ async def on_message(message):
     # valid_users = ['ebulo']
     IST = pytz.timezone('Asia/Kolkata')
     hr = datetime.now(IST).hour
+    min = datetime.now(IST).minute
 
 
     if str(message.channel) in channels:
@@ -55,6 +56,11 @@ async def on_message(message):
                 await message.channel.send("It's Time To Sleep 😴")
             else:
                 await message.channel.send("Something Went Wrong 🛸")
+
+        if hr == 0 and min == 6:
+            news_list1 = sg.getNews("TechTopic")
+            await message.channel.send("Hello Everyone: Goodmorning! ")
+            await message.channel.send(news_list1)
 
 
         elif message.content == "_users":
