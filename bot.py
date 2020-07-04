@@ -35,18 +35,18 @@ async def on_message(message):
     min = datetime.now(IST).minute
     
     # bad words check.
-    bad_words = ["harami", "kutta", "napoonsak", "chutiya", "bharwa", "randwa", "rand", "gandwa", "bhenchod", "bhosdike", "bsdk", "bkl", "gand", "randi"]
+    bad_words = ["harami", "kutta", "napoonsak", "chutiya", "bharwa", "randwa", "rand", "gandwa", "bhenchod", "bhosdike", "madarchod", "laude", "lode", "bsdk", "bkl", "gand", "randi"]
 
     for word in bad_words:
         if message.content.count(word) > 0:
             await message.channel.purge(limit=1)
-            await message.channel.send(" No Bad Words Please! ")
+            await message.channel.send("calm bro calm, No Bad Words Please! ")
 
     
     # Embed Messages trial 2
     # Help for all the commands.
     if message.content == "_help":
-        embed = discord.Embed(title="Help on Bot", description="Some useful commands")
+        embed = discord.Embed(title="Help on Bot", description="Some useful commands", color=0xffff00)
         embed.add_field(name="_hello", value="Greets the user")
         embed.add_field(name="_users", value="Prints number of users")
         embed.add_field(name="_claide", value="will give url data from google search.")
@@ -122,35 +122,33 @@ async def on_message(message):
 
         # Here are some of the test embeds below
 
-        elif "_newstest" in str(msg).lower():
+        elif "_ntest" in str(msg).lower():
             n = sg.getnewstest()
 
             for i in n:
-                embed1 = discord.Embed(title=i['title'], description=i['desc'])
+                embed1 = discord.Embed(title=i['title'], description=i['desc'], color=0xff0000)
                 embed1.add_field(name="Link to Page", value=f"[click here]({i['url']})")
                 embed1.set_image(url=i['image'])
                 await message.channel.send(content=None, embed=embed1)
 
-        elif "_newstest1" in str(msg).lower():
+        elif "_ntest1" in str(msg).lower():
             n = sg.getnewstest()
 
             for i in n:
-                embed2 = discord.Embed(title=i['title'], description=i['desc'])
+                embed2 = discord.Embed(title=i['title'], description=i['desc'], color=0x884f20)
                 embed2.add_field(name="Link to Page", value="[click here]({i['url']})")
                 embed2.set_image(url=i['image'])
                 await message.channel.send(content=None, embed=embed2)
 
-        elif "_newstest2" in str(msg).lower():
+        elif "_ntest2" in str(msg).lower():
             n = sg.getnewstest()
 
             for i in n:
-                embed4 = discord.Embed(title=i['title'], description=i['desc'])
+                embed4 = discord.Embed(title=i['title'], description=i['desc'], color=0x049009)
                 embed4.add_field(name="Link to Page", value="[click here]({i['url']})")
                 embed4.add_field(name="Image", value=i['image'])
                 await message.channel.send(content=None, embed=embed4)
 
-        elif "_test1" in str(msg).lower():
-            await message.channel.send("Click to visit google, [Here](https://www.google.com)")
 
         # Testing part ends here.
 
@@ -201,7 +199,7 @@ async def on_message(message):
 
         elif str(msg).lower() in bad_words:
             await message.channel.purge(limit=1)
-            await message.channel.send("No bad words please!")
+            await message.channel.send("calm boi, No bad words please!")
 
         elif str(msg).lower() in goodnight:
             r_num1 = random.randint(0, len(goodnight)-1)
