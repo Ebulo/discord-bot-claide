@@ -46,6 +46,6 @@ def getNews(topic):
     for i in json_format:
         if a == 4:
             break
-        news.append(i['title'] + str(i['url']))
+        news.append([i['title'] + str(i['url']) + str(i['urlToImage'])])
         a = a + 1
     return news
