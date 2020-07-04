@@ -42,14 +42,25 @@ async def on_message(message):
             await message.channel.purge(limit=1)
             await message.channel.send(" No Bad Words Please! ")
 
+    
     # Embed Messages trial 2
     # Help for all the commands.
     if message.content == "_help":
         embed = discord.Embed(title="Help on Bot", description="Some useful commands")
         embed.add_field(name="_hello", value="Greets the user")
         embed.add_field(name="_users", value="Prints number of users")
+        embed.add_field(name="_claide", value="will give url data from google search.")
+        embed.add_field(name="_wiki", value="wikipedia search data")
+        embed.add_field(name="_say", value="repeats what you say")
+        embed.add_field(name="_thanks", value="..")
+        embed.add_field(name="_good", value="..")
+        embed.add_field(name="_welcome", value="..")
+        embed.add_field(name="_bye", value="..")
         await message.channel.send(content=None, embed=embed)
 
+    if message.content == "_try":
+        embed = discord.Embed(title="Putting hyperlinks!", description="Check Hyperlinks")
+        embed.add_field(name="Google", value="Click [Link Here](https://www.google.com)")
 
     if str(message.channel) in channels:
         
@@ -95,6 +106,7 @@ async def on_message(message):
             await message.channel.send("It's my Pleasure..")
         elif "_bye" in str(msg):
             await message.channel.send("Byee..")
+        
 
 
         elif "_wiki" in str(msg).lower():
@@ -107,6 +119,40 @@ async def on_message(message):
         elif "_news" in str(msg).lower():
             news_list1 = sg.getNews("TechTopic")
             await message.channel.send(news_list1)
+
+        # Here are some of the test embeds below
+
+        elif "_newstest" in str(msg).lower():
+            n = sg.getnewstest()
+
+            for i in n:
+                embed1 = discord.Embed(title=i['title'], description=i['desc'])
+                embed1.add_field(name="Link to Page", value=f"[click here]({i['url']})")
+                embed1.set_image(url=i['image'])
+                await message.channel.send(content=None, embed=embed1)
+
+        elif "_newstest1" in str(msg).lower():
+            n = sg.getnewstest()
+
+            for i in n:
+                embed2 = discord.Embed(title=i['title'], description=i['desc'])
+                embed2.add_field(name="Link to Page", value="[click here]({i['url']})")
+                embed2.set_image(url=i['image'])
+                await message.channel.send(content=None, embed=embed2)
+
+        elif "_newstest2" in str(msg).lower():
+            n = sg.getnewstest()
+
+            for i in n:
+                embed4 = discord.Embed(title=i['title'], description=i['desc'])
+                embed4.add_field(name="Link to Page", value="[click here]({i['url']})")
+                embed4.add_field(name="Image", value=i['image'])
+                await message.channel.send(content=None, embed=embed4)
+
+        elif "_test1" in str(msg).lower():
+            await message.channel.send("Click to visit google, [Here](https://www.google.com)")
+
+        # Testing part ends here.
 
         elif "_claide" in str(msg).lower(): # Have changed here claide to _claide
             query = str(msg).replace("claide", "")
@@ -132,11 +178,12 @@ async def on_message(message):
             #         break
             #     a += 1
 
-        elif "_sendtry" in str(msg).lower():  #Error in sending the embed messages.
-            embed = discord.Embed(title="Hello", description='I am a game bot', color=0x00ff00)
-            embed.add_field(name="Claide", value="bot", inline=False)
-            embed.add_field(name="EbuloBot", value="PreviousBot", inline=False)
-            await message.channel.send(embed=embed)
+        elif "_sendtest" in str(msg).lower():  #Error in sending the embed messages.
+            embed3 = discord.Embed(title="Hello", description='I am a game bot', color=0x00ff00)
+            embed3.add_field(name="Claide", value="bot")
+            embed3.add_field(name="EbuloBot", value="PreviousBot")
+            await message.channel.send(content=None, embed=embed3)
+
 
         elif "_play" in str(msg).lower():
             await message.channel.send("Play is in a Beta Mode and still working on it.")
@@ -151,6 +198,10 @@ async def on_message(message):
         elif str(msg).lower() in excite_list:
             r_num = random.randint(0, len(excite_reply)-1)
             await message.channel.send(excite_reply[r_num])
+
+        elif str(msg).lower() in bad_words:
+            await message.channel.purge(limit=1)
+            await message.channel.send("No bad words please!")
 
         elif str(msg).lower() in goodnight:
             r_num1 = random.randint(0, len(goodnight)-1)

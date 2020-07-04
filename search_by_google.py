@@ -49,3 +49,23 @@ def getNews(topic):
         news.append([i['title'] + " | Link: " + str(i['url']) + " | Image: " + str(i['urlToImage'])])
         a = a + 1
     return news
+
+
+def getnewstest():
+    api_key = "96a24fcb4d304307938060377016e9fc"
+
+    url = f"http://newsapi.org/v2/top-headlines?sources=google-news-in&apiKey={api_key}"
+    req = requests.get(url)
+    json_format = req.json()['articles']
+
+    news = []
+
+    a = 0
+    for i in json_format:
+        if a == 4:
+            break
+        news.append({'title': str(i['title']), 'url': str(i['url']), 'image': str(i['urlToImage']), 'desc': str(i['description'])})
+        a = a + 1
+    return news
+
+print(getnewstest())
