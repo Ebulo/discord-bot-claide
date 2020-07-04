@@ -33,6 +33,22 @@ async def on_message(message):
     IST = pytz.timezone('Asia/Kolkata')
     hr = datetime.now(IST).hour
     min = datetime.now(IST).minute
+    
+    # bad words check.
+    bad_words = ["harami", "kutta", "napoonsak", "chutiya", "bharwa", "randwa", "rand", "gandwa", "bhenchod", "bhosdike", "bsdk", "bkl", "gand", "randi"]
+
+    for word in bad_words:
+        if message.content.count(word) > 0:
+            await message.channel.purge(limit=1)
+            await message.channel.send(" No Bad Words Please! ")
+
+    # Embed Messages trial 2
+    # Help for all the commands.
+    if message.content == "_help":
+        embed = discord.Embed(title="Help on Bot", description="Some useful commands")
+        embed.add_field(name="_hello", value="Greets the user")
+        embed.add_field(name="_users", value="Prints number of users")
+        await message.channel.send(content=None, embed=embed)
 
 
     if str(message.channel) in channels:
@@ -92,7 +108,7 @@ async def on_message(message):
             news_list1 = sg.getNews("TechTopic")
             await message.channel.send(news_list1)
 
-        elif "claide" in str(msg).lower():
+        elif "_claide" in str(msg).lower(): # Have changed here claide to _claide
             query = str(msg).replace("claide", "")
             result_list = sg.search_data(query)
             await message.channel.send(result_list)
