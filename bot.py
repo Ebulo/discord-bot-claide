@@ -35,7 +35,7 @@ async def on_message(message):
     min = datetime.now(IST).minute
     
     # bad words check.
-    bad_words = ["harami", "kutta", "napoonsak", "chutiya", "bharwa", "randwa", "rand", "gandwa", "bhenchod", "bhosdike", "madarchod", "laude", "lode", "bsdk", "bkl", "gand", "randi"]
+    bad_words = ["harami", "maghyaa", "gandi","gaandi", "bando", "chodipua",  "chodi", "bala", "maghia", "jhant", "chut", "kutta", "napoonsak", "chutiya", "bharwa", "randwa", "rand", "gandwa", "bhenchod", "bhosdike", "madarchod", "laude", "lode", "bsdk", "bkl", "gand", "randi"]
 
     for word in bad_words:
         if message.content.count(word) > 0:
