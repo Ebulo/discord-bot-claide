@@ -69,7 +69,7 @@ async def on_message(message):
         msg = message.content
         if message.content.find("_hello") != -1:
             await message.channel.send(f"Hi {str(message.author)[0:-5]}")
-            await message.channel.send(hr + " : " + min)
+            await message.channel.send(str(hr) + " : " + str(min))
 
             if hr >= 4 and hr <=11:
                 await message.channel.send("Good Morning! Have Nice day 😃")
